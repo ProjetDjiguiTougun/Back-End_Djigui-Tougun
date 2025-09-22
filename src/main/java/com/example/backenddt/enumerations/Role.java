@@ -1,8 +1,8 @@
-package com.example.back_end_DT.enumerations;
+package com.example.backenddt.enumerations;
 
 public enum Role {
-    ROLE_ADMIN,
-    ROLE_ASSOCIATION,
-    ROLE_PARRAIN,
-    ROLE_PARENT
+    ADMIN,
+    ASSOCIATION,
+    PARRAIN,
+    PARENT
 }
