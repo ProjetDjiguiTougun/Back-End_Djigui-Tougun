@@ -1,36 +1,30 @@
-package com.example.backenddt.entites;
+package com.example.backenddt.requeteDTO;
 
 import com.example.backenddt.enumerations.Role;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
-@Table(name = "utilisateurs")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
+public class UserRequestDTO {
+    public String prenom;
+    private String nomComplet;
     private String email;
-
-    @Column
     private String password;
-
-    @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Long getId() {
-        return id;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
     }
 
     public String getEmail() {
@@ -56,4 +50,5 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }
