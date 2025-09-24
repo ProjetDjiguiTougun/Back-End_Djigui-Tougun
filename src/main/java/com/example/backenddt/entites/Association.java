@@ -1,5 +1,6 @@
 package com.example.backenddt.entites;
 
+import com.example.backenddt.enumerations.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,19 @@ public class Association {
     private User user;
 
     @Column
-    private String nom;
+    private String prenomDirecteur;
+
+    @Column
+    private String nomDirecteur;
+
+    @Column
+    private String emailDirecteur;
+
+    @Column
+    private String passwordDirecteur;
+
+    @Column
+    private String nomAssociation;
 
     @Column
     private String adresse;
