@@ -1,13 +1,16 @@
 package com.example.backenddt.controllers;
 
 import com.example.backenddt.entites.Association;
-import com.example.backenddt.entites.Parrain;
+import com.example.backenddt.entites.Enfant;
 import com.example.backenddt.entites.User;
 import com.example.backenddt.repository.AssociationRepository;
-import com.example.backenddt.repository.CampagneRepository;
 import com.example.backenddt.repository.UserRepository;
+import com.example.backenddt.requeteDTO.BesoinRequestDTO;
 import com.example.backenddt.requeteDTO.CampagneRequestDTO;
+import com.example.backenddt.requeteDTO.EnfantRequestDTO;
+import com.example.backenddt.services.BesoinService;
 import com.example.backenddt.services.CampagneService;
+import com.example.backenddt.services.EnfantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +31,11 @@ public class AssociationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EnfantService enfantService;
 
+    @Autowired
+    private BesoinService besoinService;
 
     public Association getUser(Jwt jwt){
 //        @AuthenticationPrincipal
@@ -78,5 +85,25 @@ public class AssociationController {
             return ResponseEntity.status(401).body("Vous n'etes pas connecter");
         }
         return campagneService.listCampagne(asso);
+    }
+
+    //Pour l'ajout des Besoins dans la table Besoin :
+    @PostMapping("/createBesoin")
+    public ResponseEntity<?> createBesoin(@RequestBody BesoinRequestDTO besoin){
+        return besoinService.newBesoin(besoin);
+    }
+
+    //Pour l'insertion d'un Enfant :
+    @PostMapping("/createEnfant")
+    public ResponseEntity<?> createEnfant(@RequestBody EnfantRequestDTO enfantRequestDTO,@AuthenticationPrincipal Jwt jwt){
+        Association asso = getUser(jwt);
+        Enfant enfantCreate = enfantService.createEnfant(enfantRequestDTO,asso);
+        if (asso == null) {
+            return ResponseEntity.status(401).body("Vous n'etes pas connecter");
+        }
+        if (enfantCreate!=null){
+            return ResponseEntity.ok().body(enfantCreate);
+        }
+        return ResponseEntity.ofNullable("Erreur lors de la creation d'un enfant");
     }
 }

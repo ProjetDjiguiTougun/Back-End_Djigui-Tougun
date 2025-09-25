@@ -44,6 +44,9 @@ public class Campagne {
     @OneToMany(mappedBy = "campagne",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<RapportScolaire> rapportScolaire = new HashSet<>();
 
+    @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Besoin> besoins = new HashSet<>();
+
     @OneToMany(mappedBy = "campagne",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Depense> depense = new HashSet<>();
 

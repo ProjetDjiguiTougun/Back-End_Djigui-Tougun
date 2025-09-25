@@ -37,6 +37,9 @@ public class UserController {
 
     @PostMapping("new/parent")
     public ResponseEntity<?> createParent(@RequestBody ParentRequestDTO users){
-        return parentService.createParent(users);
+        if (parentService.createParent(users)!=null){
+            return ResponseEntity.ok().body(parentService.createParent(users)) ;
+        }
+        return ResponseEntity.ofNullable("Erreur lors de la creation de compte Parent");
     }
 }

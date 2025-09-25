@@ -25,6 +25,9 @@ public class Parent {
     @Column
     private String prenom;
 
+    @Column(unique = true)
+    private String telephone;
+
     @Column
     private String adresse;
 
