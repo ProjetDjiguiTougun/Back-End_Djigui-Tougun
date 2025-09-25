@@ -43,7 +43,10 @@ public class AssociationService {
 
                 Association association = new Association();
                 association.setAdresse(users.adresse);
-                association.setNom(users.nomAssociation);
+                association.setNomDirecteur(users.nomDirecteur);
+                association.setPrenomDirecteur(users.prenomDirecteur);
+                association.setEmailDirecteur(users.emailDirecteur);
+                association.setNomAssociation(users.nomAssociation);
                 association.setUser(user);
                 association.setDescription(users.description);
                 associationRepository.save(association);

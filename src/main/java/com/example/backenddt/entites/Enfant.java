@@ -1,5 +1,6 @@
 package com.example.backenddt.entites;
 
+import com.example.backenddt.enumerations.Genre;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +29,8 @@ public class Enfant {
 
     @Column
     private String niveau;
-
-    @ManyToMany
-    @JoinTable(
-            name = "enfant_besoin",
-            joinColumns = @JoinColumn(name = "enfant_id"),
-            inverseJoinColumns = @JoinColumn(name = "besoin_id")
-    )
-    private Set<Besoin> besoin = new HashSet<>();
+    @Column
+    private Genre genre;
 
     @OneToMany(mappedBy = "enfant",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<RapportScolaire> rapportScolaire = new HashSet<>();

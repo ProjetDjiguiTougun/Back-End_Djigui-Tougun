@@ -1,14 +1,13 @@
 package com.example.backenddt.entites;
 
+import com.example.backenddt.responseDTO.ListCampagneResponse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -44,6 +43,9 @@ public class Campagne {
 
     @OneToMany(mappedBy = "campagne",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<RapportScolaire> rapportScolaire = new HashSet<>();
+
+    @OneToMany(mappedBy = "campagne", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Besoin> besoins = new HashSet<>();
 
     @OneToMany(mappedBy = "campagne",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Depense> depense = new HashSet<>();

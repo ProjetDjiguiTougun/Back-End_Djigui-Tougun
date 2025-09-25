@@ -25,7 +25,7 @@ public class ParentService {
         this.keycloakService = keycloakService;
     }
 
-    public ResponseEntity<?> createParent(ParentRequestDTO users) {
+    public Parent createParent(ParentRequestDTO users) {
         try {
             boolean result = keycloakService.createUserWithRole(
                     users.nom,
@@ -46,17 +46,19 @@ public class ParentService {
                 parent.setAdresse(users.adresse);
                 parent.setNom(users.nom);
                 parent.setPrenom(users.prenom);
+                parent.setTelephone(users.telephone);
                 parent.setUser(user);
                 parentRepository.save(parent);
 
-                return ResponseEntity.ok("Parent créé avec succès : "+parent);
+                return parent;
             } else {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body(keycloakService.error);
+                return null;
             }
 
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erreur lors de la création de Parent : " + e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Erreur lors de la création de Parent : " + e.getMessage());
+            return null;
         }
     }
 }
